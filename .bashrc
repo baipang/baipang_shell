@@ -21,11 +21,3 @@ function cd(){
     builtin cd "${new_directory}"
     displayVersion
 }
-
-function ..(){
-	`cd ../`
-}
-
-function ....(){
-	`cd ../../`
-}
