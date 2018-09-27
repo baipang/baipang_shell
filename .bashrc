@@ -1,4 +1,7 @@
 #!/bin/bash 
+# program 
+# this program is function to replace the default shell alias
+# author baipang111@gmail.com 
 
 function csql(){
     `mysqldump -h 192.168.99.254 -u sanjieke_main -pIFKgD3iVicDXTD3Q sanjieke_main_beta > /home/vagrant/vagrant.sql`

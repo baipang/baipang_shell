@@ -1,4 +1,7 @@
 #!/bin/bash
+# program
+# this program is for del the timeout tauble data to save space
+# autor baipang111@gmail.com
 
 # 切换到维护log目录
 cd "$1"
