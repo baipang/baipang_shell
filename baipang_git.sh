@@ -1,4 +1,7 @@
 #!/bin/sh
+# program
+# this program is for git to reduce command number,reduce enter DI and number time for sjk develop
+#author  baipang111@gmail.com
 function projectTo(){
 	project=`ls cd ../`;
 	first=0;
