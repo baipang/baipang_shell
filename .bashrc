@@ -11,8 +11,7 @@ alias rm="rm -i"
 alias c="clear"
 
 # some more ls aliases
-alias lm='ls -al | less'
-alias ll='ls -al'
+alias ll='ls -al | less'
 alias la='ls -A'
 
 function csql(){
