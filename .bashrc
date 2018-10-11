@@ -8,11 +8,14 @@
 
 
 alias rm="rm -i"
+
 alias c="clear"
 
 # some more ls aliases
 alias ll='ls -al | less'
 alias la='ls -A'
+
+alias h="history"
 
 function csql(){
     `mysqldump -h 192.168.99.254 -u sanjieke_main -pIFKgD3iVicDXTD3Q sanjieke_main_beta > /home/vagrant/vagrant.sql`
