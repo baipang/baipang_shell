@@ -2,8 +2,18 @@
 # program 
 # this program is function to replace the default shell alias
 # author baipang111@gmail.com 
+
+#history 
+# 2018-10-11 add alias
+
+
 alias rm="rm -i"
 alias c="clear"
+
+# some more ls aliases
+alias lm='ls -al | less'
+alias ll='ls -al'
+alias la='ls -A'
 
 function csql(){
     `mysqldump -h 192.168.99.254 -u sanjieke_main -pIFKgD3iVicDXTD3Q sanjieke_main_beta > /home/vagrant/vagrant.sql`
