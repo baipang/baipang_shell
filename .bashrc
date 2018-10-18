@@ -6,6 +6,8 @@
 #history 
 # 2018-10-11 add alias
 
+alias ip="ifconfig eth0 | grep 'inet addr' | sed 's/^.*inet addr://g'"
+alias ips="ifconfig eth0 | grep 'inet addr' | sed 's/^.*inet addr://g' | sed 's/Bcast.*//g'"
 
 alias rm="rm -i"
 
