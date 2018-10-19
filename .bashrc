@@ -66,3 +66,15 @@ function sea()
 	test $# = 2 && search_content=$2
 	find $search_file_path -type f | xargs -n 10 grep --color=auto "$search_content"
 }
+
+function seal()
+{
+	if [ $# = 2 ]; then
+		search_file_path=$1
+	else
+		search_file_path='./'
+	fi
+	test $# = 1 && search_content=$1 
+	test $# = 2 && search_content=$2
+	find $search_file_path -type f | xargs -n 10 grep -l --color=auto "$search_content"
+}
