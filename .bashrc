@@ -32,7 +32,6 @@ export wi='/data/webroot/wiki.wiki/'
 export pa='/data/webroot/pay.sanjieke.com/'
 export ba='/home/vagrant/baipang/baipang_shell/'
 
-
 function csql(){
     `mysqldump -h 192.168.99.254 -u sanjieke_main -pIFKgD3iVicDXTD3Q sanjieke_main_beta > /home/vagrant/vagrant.sql`
 }
