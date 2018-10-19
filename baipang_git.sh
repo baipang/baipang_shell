@@ -2,6 +2,11 @@
 # program
 # this program is for git to reduce command number,reduce enter DI and number time for sjk develop
 #author  baipang111@gmail.com
+
+#history
+# change echo `git status` to git status 
+# change can run in parents process not in child process,diff can have color
+
 function projectTo(){
 	project=`ls cd ../`;
 	first=0;
@@ -11,11 +16,11 @@ function projectTo(){
 		cd "/data/webroot/$name"
 		if [ $1 = "pre" ]
 		then
-		    echo `git checkout -b pre`
+		    git checkout -b pre
 		else
-		    echo "`git checkout pre`"
-		    echo "`git pull`"
-		    echo "`git checkout -b DI-"$1"`"
+		    git checkout pre
+		    git pull
+		    git checkout -b DI-"$1"
 		fi
 		displayVersion
 	done
@@ -23,37 +28,44 @@ function projectTo(){
 
 case "$1" in
     i   )
-        displayVersion;;
+        displayVersion
+	;;
     s   )
-        echo "`git status`"
-        displayVersion;;
+        git status
+        displayVersion
+	;;
     d  )
-        echo "`git diff`"
-        displayVersion;;
+	git diff
+        displayVersion
+	;;
     capi)
-        echo "`git add .`"
-        echo "`git commit -a -m '#'$version`"
-        echo "`git push origin $version`";;
+        git add .
+        git commit -a -m '#'$version
+        git push origin $version
+	;;
     cap)
-        echo "`git add .`"
-        echo "`git commit -a -m "$2"`"
-        echo "`git push origin $version`";;
+        git add .
+        git commit -a -m "$2"
+        git push origin $version
+	;;
     cia )
-        echo "`git add .`"
-        echo "`git commit -a -m "$2"`";;
+        git add .
+        git commit -a -m "$2"
+	;;
     ss  )
-        echo "`git status -s`"
-        displayVersion;;
+        git status -s
+        displayVersion
+	;;
     diss )
-        echo "`git checkout -- $2`";;
+        git checkout -- $2
+	;;
     co  ) 
         if [ $2 = "pre" ]
         then
-            echo "`git checkout pre`"
-
+            git checkout pre
             displayVersion
         else
-            echo "`git checkout DI-"$2"`"
+            git checkout DI-"$2"
             displayVersion
         fi
         displayVersion
@@ -61,12 +73,12 @@ case "$1" in
     pco  ) 
         if [ $2 = "pre" ]
         then
-            echo "`git pull`"
-            echo "`git checkout pre`"
+            git pull
+            git checkout pre
             displayVersion
         else
-            echo "`git pull`"
-            echo "`git checkout DI-"$2"`"
+            git pull
+            git checkout DI-"$2"
             displayVersion
         fi
         displayVersion
@@ -74,86 +86,103 @@ case "$1" in
     cof  ) 
         if [ $2 = "pre" ]
         then
-            echo "`git checkout -f pre`"
+            git checkout -f pre
         else
-            echo "`git checkout -f DI-"$2"`"
+            git checkout -f DI-"$2"
         fi
-        displayVersion;;
+        displayVersion
+	;;
     cob  ) 
         if [ $2 = "pre" ]
         then
-            echo `git checkout -b pre`
+            git checkout -b pre
         else
-            echo "`git checkout pre`"
-            echo "`git pull`"
-            echo "`git checkout -b DI-"$2"`"
+            git checkout pre
+            git pull
+            git checkout -b DI-"$2"
         fi
-        displayVersion;;
+        displayVersion
+	;;
     brd  ) 
         if [ $2 = "pre" ]
         then
-            echo "`git branch -d pre`"
+            git branch -d pre
         else
-            echo "`git branch -d DI-"$2"`"
+            git branch -d DI-"$2"
         fi
         ;;
     brD  )
         if [ $2 = "pre" ]
         then
-            echo "`git branch -D pre`"
+            git branch -D pre
         else
-            echo "`git branch -D DI-"$2"`"
+            git branch -D DI-"$"
         fi
         ;;
     p    )
-        echo "`git push origin "DI-$2"`";;
+        git push origin "DI-$2"
+	;;
     pp   ) 
-        echo "`git push origin $version`";;
+        git push origin $version
+	;;
     st  ) 
-        echo "`git stash`";;
-    stl ) echo "`git stash list`";;
+        git stash
+	;;
+    stl ) 
+	git stash list
+	;;
     stcl ) 
            echo -n "Clear the stash content,Are you sure? "
            read delConfirm
            if [ $delConfirm = 'y' ]
            then
-               echo "`git stash clear`"
+               git stash clear
            fi
            ;;
-    stp  ) echo "`git stash apply "stash@{0}"`";;
-    e    ) PS1="[\u@\h \W]$";;
+    stp  ) 
+	git stash apply "stash@{0}"
+	;;
+    e    )
+	 PS1="[\u@\h \W]$"
+  	;;
     de   )
          versionNumber=${version#DI-}
          mkdir $versionNumber
          cd $versionNumber
-         touch $2;;
+         touch $2
+       	;;
     copy )
          versionNumber=${version#DI-}
          mkdir $versionNumber
          cd $versionNumber
          touch 'post'
 	 echo "cd /data/webroot/admin.sanjieke.com/src
-yes Y | /usr/local/sanjieke/php-5.6/bin/php index.php Temp/copyCourseToAnotherCourse $2 $3" > 'post';;
-
+yes Y | /usr/local/sanjieke/php-5.6/bin/php index.php Temp/copyCourseToAnotherCourse $2 $3" > 'post'
+	;;
     copydel )
          versionNumber=${version#DI-}
          mkdir $versionNumber
          cd $versionNumber
          touch 'post'
 	 echo "cd /data/webroot/admin.sanjieke.com/src
-yes Y | /usr/local/sanjieke/php-5.6/bin/php index.php Temp/copyCourseToAnotherCourse $2 $3 -f del" > 'post';;
-
+yes Y | /usr/local/sanjieke/php-5.6/bin/php index.php Temp/copyCourseToAnotherCourse $2 $3 -f del" > 'post'
+	;;
     bind   )
-        echo "`git branch --set-upstream-to=origin/$version`";;
+        git branch --set-upstream-to=origin/$version
+	;;
     bindm   )
-        echo "`git branch --set-upstream-to=origin/$version`"
-        echo "`git pull`"
-        echo "`git merge origin/pre`";;
+        git branch --set-upstream-to=origin/$version
+        git pull
+        git merge origin/pre
+	;;
     dr )
-        echo "`git push origin --delete DI-"$2"`";;
+        git push origin --delete DI-"$2"
+	;;
     coba )
-	projectTo $2;;
+	projectTo $2
+	;;
     *    ) 
         shift 0
-        echo "`git $@`";;
+        git $@
+	;;
 esac

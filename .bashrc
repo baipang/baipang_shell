@@ -5,6 +5,7 @@
 
 #history 
 # 2018-10-11 add alias
+# history add sea function to gerp file content 
 
 alias ip="ifconfig eth0 | grep 'inet addr' | sed 's/^.*inet addr://g'"
 alias ips="ifconfig eth0 | grep 'inet addr' | sed 's/^.*inet addr://g' | sed 's/Bcast.*//g'"
@@ -50,4 +51,16 @@ function cd(){
     fi;
     builtin cd "${new_directory}"
     displayVersion
+}
+
+function sea()
+{
+	if [ $# = 2 ]; then
+		search_file_path=$1
+	else
+		search_file_path='./'
+	fi
+	test $# = 1 && search_content=$1 
+	test $# = 2 && search_content=$2
+	find $search_file_path -type f | xargs -n 10 grep --color=auto "$search_content"
 }
