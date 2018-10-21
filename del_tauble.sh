@@ -16,23 +16,20 @@ now_sec=`date +%S`
 
 function judge_file_del(){
     # 不是当年的数据全部清空
-    if [ $1 != $now_year ]
-    then
+    if [ $1 != $now_year ]; then
         echo 1
         exit 0
     fi
 
     # 不是最近三个月的数据全部清空
     month_ahead_three=`expr $now_month - 3`
-    if [ $2 -lt $month_ahead_three ]
-    then
+    if [ $2 -lt $month_ahead_three ]; then
         echo 1
         exit 0 
     fi
 
     # 如果是当天的数据不清空，全部保留
-    if [ $3 -eq $now_day ]
-    then
+    if [ $3 -eq $now_day ]; then
         echo 0
         exit 0
     fi
@@ -46,8 +43,7 @@ function judge_file_del(){
     #fi
 
    # 三个月之内的不是当天的，每天的数据只留三份数, 分别是小时为00, 12,17
-   if [ $4 -ne 00 -a $4 -ne 12 -a $4 -ne 17 ]
-   then
+   if [ $4 -ne 00 -a $4 -ne 12 -a $4 -ne 17 ]; then
        echo 1
        exit 0
    else
@@ -77,8 +73,7 @@ do
     sec=`echo ${arr[4]} | cut -d '.' -f 1,3`;
 
     is_del="`judge_file_del $y $m $d $hr $min $sec`";
-    if [ $is_del -eq 1 ]
-    then
+    if [ $is_del -eq 1 ]; then
         rm $one
     fi
 done
