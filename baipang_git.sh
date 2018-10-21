@@ -186,7 +186,7 @@ yes Y | /usr/local/sanjieke/php-5.6/bin/php index.php Temp/copyCourseToAnotherCo
     dr )
         git push origin --delete DI-"$2"
 	;;
-    coba )
+    coa )
 	projectTo $2
 	;;
     *    ) 
