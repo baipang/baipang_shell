@@ -140,9 +140,8 @@ case "$1" in
     stl ) 
 	git stash list
 	;;
-    stcl ) 
-           echo -n "Clear the stash content,Are you sure? "
-           read delConfirm
+    stc ) 
+           read -p "Clear the stash content,Are you sure? please input y or n: " delConfirm
            if [ $delConfirm = 'y' ]; then
                git stash clear
            fi
