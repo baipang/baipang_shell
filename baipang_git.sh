@@ -14,8 +14,7 @@ function projectTo(){
 	do
 		echo $name;
 		cd "/data/webroot/$name"
-		if [ $1 = "pre" ]
-		then
+		if [ $1 = "pre" ]; then
 		    git checkout -b pre
 		else
 		    git checkout pre
@@ -60,8 +59,7 @@ case "$1" in
         git checkout -- $2
 	;;
     co  ) 
-        if [ $2 = "pre" ]
-        then
+        if [ $2 = "pre" ]; then
             git checkout pre
             displayVersion
         else
@@ -71,8 +69,7 @@ case "$1" in
         displayVersion
         ;;
     pco  ) 
-        if [ $2 = "pre" ]
-        then
+        if [ $2 = "pre" ]; then
             git pull
             git checkout pre
             displayVersion
@@ -84,8 +81,7 @@ case "$1" in
         displayVersion
         ;;
     cof  ) 
-        if [ $2 = "pre" ]
-        then
+        if [ $2 = "pre" ]; then
             git checkout -f pre
         else
             git checkout -f DI-"$2"
@@ -93,8 +89,7 @@ case "$1" in
         displayVersion
 	;;
     cob  ) 
-        if [ $2 = "pre" ]
-        then
+        if [ $2 = "pre" ]; then
             git checkout -b pre
         else
             git checkout pre
@@ -104,16 +99,14 @@ case "$1" in
         displayVersion
 	;;
     brd  ) 
-        if [ $2 = "pre" ]
-        then
+        if [ $2 = "pre" ]; then
             git branch -d pre
         else
             git branch -d DI-"$2"
         fi
         ;;
     brD  )
-        if [ $2 = "pre" ]
-        then
+        if [ $2 = "pre" ]; then
             git branch -D pre
         else
             git branch -D DI-"$"
@@ -134,8 +127,7 @@ case "$1" in
     stcl ) 
            echo -n "Clear the stash content,Are you sure? "
            read delConfirm
-           if [ $delConfirm = 'y' ]
-           then
+           if [ $delConfirm = 'y' ]; then
                git stash clear
            fi
            ;;
