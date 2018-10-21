@@ -7,19 +7,66 @@
 # change echo `git status` to git status 
 # change can run in parents process not in child process,diff can have color
 
+# 2018-10-21 
+# change function projectTo add egrep to validate the project is normal project. isNormalProject
+# add function getBranchName and isAtBranch and isLocalBranch and checkout
+
+function getBranchName(){
+	if [ $1 = 'pre' ]; then
+		branchName='pre'
+	elif [ $1 = 'master' ];then
+		branchName=master
+	else
+		branchName=DI-$1
+	fi
+	echo $branchName
+}
+
+function isAtBranch(){
+	branchCheckout=$1
+	branchAt=$(git symbolic-ref --short -q HEAD 2>/dev/null)
+	isAt=$(echo $branchAt | egrep $branchCheckout)
+
+	if [ "$isAt" != "" ];then
+		echo 1
+	fi	
+}
+
+function isLocalBranch(){
+	branchCheckout=$1
+	isBranchLocal=$(git branch -v | grep $branchCheckout)
+
+	if [ "$isBranchLocal" != "" ];then
+		echo 1
+	fi	
+}
+
+function checkout(){
+	branchName=$1
+	isLocal=$(isLocalBranch $branchName)
+	isAt=$(isAtBranch $branchName)
+
+	if [ "$isLocal" != "" ] && [ "$isAt" = "" ] ;then
+		git checkout $branchName
+	elif [ "$isLocal" = "" ];then
+		git checkout pre
+		git pull
+		git checkout -b $branchName
+	fi
+	displayVersion
+}
+
 function projectTo(){
-	project=`ls cd ../`;
-	first=0;
+	cd ../
+	project=$(ls)
 	for name in $project
 	do
-		echo $name;
 		cd "/data/webroot/$name"
-		if [ $1 = "pre" ]; then
-		    git checkout -b pre
-		else
-		    git checkout pre
-		    git pull
-		    git checkout -b DI-"$1"
+		isNormalProject=$(echo $name | egrep '(([^devutil].*\.sanjieke\.)(com|cn))|(deployment)')
+		branchName=$(getBranchName $1)
+		if [ "$isNormalProject" != "" ]; then
+			echo -e "\033[40;37m $name \033[0m"
+			checkout $branchName
 		fi
 		displayVersion
 	done
@@ -59,58 +106,27 @@ case "$1" in
         git checkout -- $2
 	;;
     co  ) 
-        if [ $2 = "pre" ]; then
-            git checkout pre
-            displayVersion
-        else
-            git checkout DI-"$2"
-            displayVersion
-        fi
-        displayVersion
-        ;;
+	branchName=$(getBranchName $2)
+	checkout $branchName
+	;;
     pco  ) 
-        if [ $2 = "pre" ]; then
-            git pull
-            git checkout pre
-            displayVersion
-        else
-            git pull
-            git checkout DI-"$2"
-            displayVersion
-        fi
-        displayVersion
+	branchName=$(getBranchName $2)
+	git pull
+	git checkout $branchName
+	displayVersion
         ;;
     cof  ) 
-        if [ $2 = "pre" ]; then
-            git checkout -f pre
-        else
-            git checkout -f DI-"$2"
-        fi
-        displayVersion
-	;;
-    cob  ) 
-        if [ $2 = "pre" ]; then
-            git checkout -b pre
-        else
-            git checkout pre
-            git pull
-            git checkout -b DI-"$2"
-        fi
+	branchName=$(getBranchName $2)
+	git checkout -f $branchName
         displayVersion
 	;;
     brd  ) 
-        if [ $2 = "pre" ]; then
-            git branch -d pre
-        else
-            git branch -d DI-"$2"
-        fi
+	branchName=$(getBranchName $2)
+	git branch -d $branchName
         ;;
     brD  )
-        if [ $2 = "pre" ]; then
-            git branch -D pre
-        else
-            git branch -D DI-"$"
-        fi
+	branchName=$(getBranchName $2)
+	git branch -D $branchName
         ;;
     p    )
         git push origin "DI-$2"

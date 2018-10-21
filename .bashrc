@@ -42,7 +42,7 @@ function tolocal(){
 
 function displayVersion(){
     version=`git symbolic-ref --short -q HEAD 2>/dev/null`
-    PS1="\e[44;37m\$version\e[m[\u@\h \W]$"
+    PS1="\e[1;31;37m\$version\e[m[\u@\h \W]$"
 }
 
 function cd(){
