@@ -64,6 +64,7 @@ function projectTo(){
 		cd "/data/webroot/$name"
 		isNormalProject=$(echo $name | egrep '(([^devutil].*\.sanjieke\.)(com|cn))|(deployment)')
 		branchName=$(getBranchName $1)
+
 		if [ "$isNormalProject" != "" ]; then
 			echo -e "\033[40;37m $name \033[0m"
 			checkout $branchName
