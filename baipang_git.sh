@@ -11,6 +11,10 @@
 # change function projectTo add egrep to validate the project is normal project. isNormalProject
 # add function getBranchName and isAtBranch and isLocalBranch and checkout
 
+# 2018-10-24
+# add function isBranchExist 
+# judge if the branch is exist in remote
+
 function getBranchName(){
 	if [ $1 = 'pre' ]; then
 		branchName='pre'
@@ -41,13 +45,25 @@ function isLocalBranch(){
 	fi	
 }
 
+function isBranchExist(){
+	branch=$1
+	
+	isBranchExist=$(git branch --remote -v | grep $branch)
+	if [ "$isBranchExist" != "" ];then
+		echo 1
+	fi
+}
+
 function checkout(){
 	branchName=$1
 	isLocal=$(isLocalBranch $branchName)
 	isAt=$(isAtBranch $branchName)
+	isRemoteExist=$(isBranchExist $branchName)
 
 	if [ "$isLocal" != "" ] && [ "$isAt" = "" ] ;then
 		git checkout $branchName
+	elif [ "$isRemoteExist" != "" ] && [ "$isAt" = "" ];then
+		git checkout -b $branchName origin/$branchName
 	elif [ "$isLocal" = "" ];then
 		git checkout pre
 		git pull
