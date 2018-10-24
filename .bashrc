@@ -31,6 +31,7 @@ export st='/data/webroot/static.sanjieke.cn/'
 export se='/data/webroot/service.sanjieke.com/'
 export wi='/data/webroot/wiki.wiki/'
 export pa='/data/webroot/pay.sanjieke.com/'
+export bl='/data/webroot/blog.sanjieke.com'
 export ba='/home/vagrant/baipang/baipang_shell/'
 
 function csql(){
