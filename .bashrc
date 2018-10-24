@@ -7,6 +7,7 @@
 # 2018-10-11 add alias
 # history add sea function to gerp file content 
 # 2018-10-21 change ps1 color
+# 2018-10-24 add global const $pa for map the pay.sanjieke.com path
 
 alias ip="ifconfig eth0 | grep 'inet addr' | sed 's/^.*inet addr://g'"
 alias ips="ifconfig eth0 | grep 'inet addr' | sed 's/^.*inet addr://g' | sed 's/Bcast.*//g'"
