@@ -15,6 +15,10 @@
 # add function isBranchExist 
 # judge if the branch is exist in remote
 
+# 2018-10-26 
+# change function isBranchExist
+# add git fetch origin
+
 function getBranchName(){
 	if [ $1 = 'pre' ]; then
 		branchName='pre'
@@ -47,8 +51,9 @@ function isLocalBranch(){
 
 function isBranchExist(){
 	branch=$1
-	
+	git fetch origin	
 	isBranchExist=$(git branch --remote -v | grep $branch)
+
 	if [ "$isBranchExist" != "" ];then
 		echo 1
 	fi
