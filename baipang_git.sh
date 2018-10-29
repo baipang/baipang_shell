@@ -19,6 +19,8 @@
 # change function isBranchExist
 # add git fetch origin
 
+# 2018-10-29 remove more place use displayVersion only use in the end
+
 function getBranchName(){
 	if [ $1 = 'pre' ]; then
 		branchName='pre'
@@ -74,7 +76,6 @@ function checkout(){
 		git pull
 		git checkout -b $branchName
 	fi
-	displayVersion
 }
 
 function projectTo(){
@@ -90,21 +91,21 @@ function projectTo(){
 			echo -e "\033[40;37m $name \033[0m"
 			checkout $branchName
 		fi
-		displayVersion
+		#displayVersion
 	done
 }
 
 case "$1" in
     i   )
-        displayVersion
+        #displayVersion
 	;;
     s   )
         git status
-        displayVersion
+        #displayVersion
 	;;
     d  )
 	git diff
-        displayVersion
+        #displayVersion
 	;;
     capi)
         git add .
@@ -122,7 +123,7 @@ case "$1" in
 	;;
     ss  )
         git status -s
-        displayVersion
+        #displayVersion
 	;;
     diss )
         git checkout -- $2
@@ -135,12 +136,12 @@ case "$1" in
 	branchName=$(getBranchName $2)
 	git pull
 	git checkout $branchName
-	displayVersion
+	#displayVersion
         ;;
     cof  ) 
 	branchName=$(getBranchName $2)
 	git checkout -f $branchName
-        displayVersion
+        #displayVersion
 	;;
     brd  ) 
 	branchName=$(getBranchName $2)
@@ -215,3 +216,4 @@ yes Y | /usr/local/sanjieke/php-5.6/bin/php index.php Temp/copyCourseToAnotherCo
         git $@
 	;;
 esac
+displayVersion
