@@ -8,6 +8,7 @@
 # history add sea function to gerp file content 
 # 2018-10-21 change ps1 color
 # 2018-10-24 add global const $pa for map the pay.sanjieke.com path
+# 2018-10-29 add global const $sy for map the system config
 
 alias ip="ifconfig eth0 | grep 'inet addr' | sed 's/^.*inet addr://g'"
 alias ips="ifconfig eth0 | grep 'inet addr' | sed 's/^.*inet addr://g' | sed 's/Bcast.*//g'"
@@ -34,6 +35,7 @@ export wi='/data/webroot/wiki.wiki/'
 export pa='/data/webroot/pay.sanjieke.com/'
 export bl='/data/webroot/blog.sanjieke.com'
 export ba='/home/vagrant/baipang/baipang_shell/'
+export sy='/data/webroot/system'
 
 function csql(){
     `mysqldump -h 192.168.99.254 -u sanjieke_main -pIFKgD3iVicDXTD3Q sanjieke_main_beta > /home/vagrant/vagrant.sql`
