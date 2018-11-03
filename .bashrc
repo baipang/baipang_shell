@@ -10,12 +10,17 @@
 # 2018-10-24 add global const $pa for map the pay.sanjieke.com path
 # 2018-10-29 add global const $sy for map the system config
 
+#history
+# 2018-11-02 add alias for ack-grep
+
 alias ip="ifconfig eth0 | grep 'inet addr' | sed 's/^.*inet addr://g'"
 alias ips="ifconfig eth0 | grep 'inet addr' | sed 's/^.*inet addr://g' | sed 's/Bcast.*//g'"
+alias ack="ack-grep"
 
 alias rm="rm -i"
 
 alias c="clear"
+
 
 # some more ls aliases
 alias ll='ls -al | less'
