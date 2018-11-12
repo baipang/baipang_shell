@@ -41,6 +41,7 @@ export pa='/data/webroot/pay.sanjieke.com/'
 export bl='/data/webroot/blog.sanjieke.com'
 export ba='/home/vagrant/baipang/baipang_shell/'
 export sy='/data/webroot/system'
+export vu='/data/webroot/vue_admin'
 
 function csql(){
     `mysqldump -h 192.168.99.254 -u sanjieke_main -pIFKgD3iVicDXTD3Q sanjieke_main_beta > /home/vagrant/vagrant.sql`
