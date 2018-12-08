@@ -21,6 +21,8 @@
 
 # 2018-10-29 remove more place use displayVersion only use in the end
 
+# 2018-12-08 replace git pull to use git fetch and git merge
+
 function getBranchName(){
 	if [ $1 = 'pre' ]; then
 		branchName='pre'
@@ -53,7 +55,6 @@ function isLocalBranch(){
 
 function isBranchExist(){
 	branch=$1
-	git fetch origin	
 	isBranchExist=$(git branch --remote -v | grep $branch)
 
 	if [ "$isBranchExist" != "" ];then
@@ -62,6 +63,7 @@ function isBranchExist(){
 }
 
 function checkout(){
+    git fetch origin # 更新远程跟踪分支，所有本地分支(跟踪分支)都是依赖于远程跟踪分支
 	branchName=$1
 	isLocal=$(isLocalBranch $branchName)
 	isAt=$(isAtBranch $branchName)
@@ -72,9 +74,7 @@ function checkout(){
 	elif [ "$isRemoteExist" != "" ] && [ "$isAt" = "" ];then
 		git checkout -b $branchName origin/$branchName
 	elif [ "$isLocal" = "" ];then
-		git checkout pre
-		git pull
-		git checkout -b $branchName
+        git checkout -b $branchName origin/pre
 	fi
 }
 
@@ -202,8 +202,6 @@ yes Y | /usr/local/sanjieke/php-5.6/bin/php index.php Temp/copyCourseToAnotherCo
 	;;
     bindm   )
         git branch --set-upstream-to=origin/$version
-        git pull
-        git merge origin/pre
 	;;
     dr )
         git push origin --delete DI-"$2"
