@@ -66,14 +66,17 @@ function isBranchExist(){
 function checkout(){
 	branchName=$1
 	isLocal=$(isLocalBranch $branchName)
-	isAt=$(isAtBranch $branchName)
-	isRemoteExist=$(isBranchExist $branchName)
+	#isAt=$(isAtBranch $branchName)
 
-	if [ "$isLocal" != "" ] && [ "$isAt" = "" ] ;then
+    if [ "$isLocal" == "" ];then # if the branch is not local branch to judge is remote branch
+        isRemoteExist=$(isBranchExist $branchName)
+    fi
+
+	if [ "$isLocal" != "" ] ;then
 		git checkout $branchName
-	elif [ "$isRemoteExist" != "" ] && [ "$isAt" = "" ];then
+	elif [ "$isRemoteExist" != "" ];then
 		git checkout -b $branchName origin/$branchName
-	elif [ "$isLocal" = "" ];then
+    else
         git checkout -b $branchName origin/pre
 	fi
 }
@@ -129,8 +132,8 @@ case "$1" in
         git checkout -- $2
 	;;
     co  ) 
-	branchName=$(getBranchName $2)
-	checkout $branchName
+	    branchName=$(getBranchName $2)
+	    checkout $branchName
 	;;
     pco  ) 
 	branchName=$(getBranchName $2)
