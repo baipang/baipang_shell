@@ -54,6 +54,7 @@ function isLocalBranch(){
 }
 
 function isBranchExist(){
+    git fetch origin # 更新远程跟踪分支，所有本地分支(跟踪分支)都是依赖于远程跟踪分支
 	branch=$1
 	isBranchExist=$(git branch --remote -v | grep $branch)
 
@@ -63,7 +64,6 @@ function isBranchExist(){
 }
 
 function checkout(){
-    git fetch origin # 更新远程跟踪分支，所有本地分支(跟踪分支)都是依赖于远程跟踪分支
 	branchName=$1
 	isLocal=$(isLocalBranch $branchName)
 	isAt=$(isAtBranch $branchName)
