@@ -23,6 +23,8 @@
 
 # 2018-12-08 replace git pull to use git fetch and git merge
 
+# 2018-12-10 resolve the git checkout new branch set error origin/branch bug[modify the function checkout]
+
 function getBranchName(){
 	if [ $1 = 'pre' ]; then
 		branchName='pre'
@@ -68,16 +70,18 @@ function checkout(){
 	isLocal=$(isLocalBranch $branchName)
 	#isAt=$(isAtBranch $branchName)
 
-    if [ "$isLocal" == "" ];then # if the branch is not local branch to judge is remote branch
+    if [ "$isLocal" != 1 ];then # if the branch is not local branch to judge is remote branch
         isRemoteExist=$(isBranchExist $branchName)
     fi
 
-	if [ "$isLocal" != "" ] ;then
+	if [ "$isLocal" == 1 ] ;then
 		git checkout $branchName
-	elif [ "$isRemoteExist" != "" ];then
+	elif [ "$isRemoteExist" == 1 ];then
 		git checkout -b $branchName origin/$branchName
     else
-        git checkout -b $branchName origin/pre
+        git checkout pre
+        git merge origin/pre
+        git checkout -b $branchName
 	fi
 }
 
