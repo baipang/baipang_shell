@@ -42,7 +42,7 @@ function isAtBranch(){
 	isAt=$(echo $branchAt | egrep $branchCheckout)
 
 	if [ "$isAt" != "" ];then
-		return 1
+		echo 1
 	fi	
 }
 
@@ -51,7 +51,7 @@ function isLocalBranch(){
 	isBranchLocal=$(git branch -v | grep $branchCheckout)
 
 	if [ "$isBranchLocal" != "" ];then
-		return 1
+		echo 1
 	fi	
 }
 
