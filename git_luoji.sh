@@ -128,6 +128,10 @@ case "$1" in
     pl   ) 
         git pull
 	;;
+    mg  )
+	git pull
+	git merge origin $2
+	;;
     st  ) 
         git stash
 	;;
