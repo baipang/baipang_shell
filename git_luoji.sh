@@ -12,6 +12,8 @@ function getBranchName(){
 		branchName='pre'
 	elif [ $1 = 'master' ];then
 		branchName=master
+	elif [ $1 = 'develop' ];then
+		branchName=develop
 	else
 		branchName=DI-$1
 	fi
@@ -130,7 +132,8 @@ case "$1" in
 	;;
     mg  )
 	git pull
-	git merge origin $2
+	branchName=$(getBranchName $2)
+	git merge origin $branchName
 	;;
     st  ) 
         git stash
