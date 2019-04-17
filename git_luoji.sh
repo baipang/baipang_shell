@@ -12,7 +12,7 @@ function getBranchName(){
 		branchName='pre'
 	elif [ $1 = 'master' ];then
 		branchName=master
-	elif [ $1 = 'develop' ];then
+	elif [ $1 = 'dev' ];then
 		branchName=develop
 	else
 		branchName=DI-$1
