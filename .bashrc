@@ -48,7 +48,6 @@ function csql(){
 }
 
 function tolocal(){
-    `mysql -uroot sanjieke_main_beta < /home/vagrant/vagrant.sql`
 }
 
 function displayVersion(){
