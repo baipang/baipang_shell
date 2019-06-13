@@ -7,6 +7,8 @@
 # change echo `git status` to git status 
 # change can run in parents process not in child process,diff can have color
 
+re='^[0-9]+([.][0-9]+)?$'
+
 function getBranchName(){
 	if [ $1 = 'dev' ]; then
 		branchName='develop'
@@ -14,7 +16,7 @@ function getBranchName(){
 		branchName=master
 	elif [ $1 = 'rel' ];then
 		branchName=release
-	elif [ "$1" -gt 0 ];then
+	elif [[ $1 =~ $re ]] ; then
 		branchName=DI-$1
 	else
 		branchName=$1
