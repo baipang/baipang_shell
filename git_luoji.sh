@@ -8,14 +8,16 @@
 # change can run in parents process not in child process,diff can have color
 
 function getBranchName(){
-	if [ $1 = 'pre' ]; then
-		branchName='pre'
-	elif [ $1 = 'master' ];then
+	if [ $1 = 'dev' ]; then
+		branchName='develop'
+	elif [ $1 = 'mas' ];then
 		branchName=master
-	elif [ $1 = 'dev' ];then
-		branchName=develop
-	else
+	elif [ $1 = 'rel' ];then
+		branchName=release
+	elif [ "$1" -gt 0 ];then
 		branchName=DI-$1
+	else
+		branchName=$1
 	fi
 	echo $branchName
 }
@@ -63,8 +65,9 @@ function checkout(){
 	elif [ "$isRemoteExist" == 1 ];then
 		git checkout -b $branchName origin/$branchName
     else
-        git checkout pre
-        git merge origin/pre
+        git checkout master
+	git fetch origin/master
+        git merge origin/master
         git checkout -b $branchName
 	fi
 }
