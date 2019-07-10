@@ -68,26 +68,9 @@ function checkout(){
 		git checkout -b $branchName origin/$branchName
     else
         git checkout master
-	git fetch origin/master
-        git merge origin/master
+	git pull
         git checkout -b $branchName
 	fi
-}
-
-function projectTo(){
-	cd ../
-	project=$(ls)
-	for name in $project
-	do
-		cd "/data/webroot/$name"
-		isNormalProject=$(echo $name | egrep '(([^devutil].*\.sanjieke\.)(com|cn))|(deployment)')
-		branchName=$(getBranchName $1)
-
-		if [ "$isNormalProject" != "" ]; then
-			echo -e "\033[40;37m $name \033[0m"
-			checkout $branchName
-		fi
-	done
 }
 
 version=`git symbolic-ref --short -q HEAD 2>/dev/null`
@@ -138,7 +121,7 @@ case "$1" in
     mg  )
 	git pull
 	branchName=$(getBranchName $2)
-	git merge origin $branchName
+	git merge origin/$branchName
 	;;
     st  ) 
         git stash
